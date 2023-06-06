@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+  source-db:
+    image: postgres:14.0
+    container_name: source-db
+    environment:
+      POSTGRES_USER: source
+      POSTGRES_PASSWORD: source
+      POSTGRES_DB: source
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-U", "source", "-d", "source"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  data-generator:
+    build:
+      context: docker/data-generator
+      dockerfile: Dockerfile
+    container_name: data-generator
+    depends_on:
+      source-db:
+        condition: service_healthy
+    command: python data_generator.py
+
+  target-db:
+    image: postgres:14.0
+    container_name: target-db
+    environment:
+      POSTGRES_USER: target
+      POSTGRES_PASSWORD: target
+      POSTGRES_DB: target
+    ports:
+      - 5433:5432
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-U", "target", "-d", "target"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  default:
+    name: data-pipeline-kafka-network
