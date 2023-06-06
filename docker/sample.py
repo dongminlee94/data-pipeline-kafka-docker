@@ -1,3 +1,0 @@
-"""Sample."""
-
-print("sample")
