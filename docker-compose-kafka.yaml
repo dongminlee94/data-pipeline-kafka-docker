@@ -64,5 +64,5 @@ services:
 
 networks:
   default:
-    name: data-pipeline-kafka-network
+    name: data-pipeline-network
     external: true
