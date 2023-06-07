@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  glue-server:
+    build:
+      context: docker/glue-server
+      dockerfile: Dockerfile
+    container_name: glue-server
+    ports:
+      - 12345:12345
+    command: python server.py
+    healthcheck:
+      test: ["CMD", "python", "-c", 'import rpyc;rpyc_client = rpyc.connect("localhost", 12345);rpyc_client.ping()']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  glue-client:
+    build:
+      context: docker/glue-client
+      dockerfile: Dockerfile
+    container_name: glue-client
+    depends_on:
+      glue-server:
+        condition: service_healthy
+    command: python client.py
+
+networks:
+  default:
+    name: data-pipeline-network

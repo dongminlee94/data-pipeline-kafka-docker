@@ -55,3 +55,13 @@ sink-postgres:
 
 sink-postgres-clean:
 	curl -X DELETE "http://localhost:8083/connectors/{sink-postgres}"
+
+# ======================================================================================
+# ======================================== Glue ========================================
+# ======================================================================================
+glue:
+	docker compose -p glue -f docker-compose-glue.yaml up -d
+
+glue-clean:
+	docker compose -p glue down -v
+	docker rmi glue-glue-server glue-glue-client

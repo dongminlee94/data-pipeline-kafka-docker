@@ -7,7 +7,7 @@ from psycopg2.extensions import connection
 from sklearn.datasets import load_iris
 
 
-def create_table(db_connect: connection) -> None:
+def create_table(pg_client: connection) -> None:
     """Create a table."""
     create_table_query = """
     CREATE TABLE IF NOT EXISTS iris_data (
@@ -20,9 +20,9 @@ def create_table(db_connect: connection) -> None:
         target int
     );"""
     print(create_table_query)
-    with db_connect.cursor() as cur:
+    with pg_client.cursor() as cur:
         cur.execute(create_table_query)
-        db_connect.commit()
+        pg_client.commit()
 
 
 def load_data() -> pd.DataFrame:
@@ -39,10 +39,10 @@ def load_data() -> pd.DataFrame:
     return df
 
 
-def main(db_connect: connection) -> None:
+def main(pg_client: connection) -> None:
     """Run main function."""
     # Create a table
-    create_table(db_connect=db_connect)
+    create_table(pg_client=pg_client)
 
     # Load iris data
     df = load_data()
@@ -65,20 +65,20 @@ def main(db_connect: connection) -> None:
             );
         """
         print(f"\nCount: {cnt}\n" f"Query: {insert_row_query}\n")
-        with db_connect.cursor() as cur:
+        with pg_client.cursor() as cur:
             cur.execute(insert_row_query)
-            db_connect.commit()
+            pg_client.commit()
 
         cnt += 1
         sleep(5)
 
 
 if __name__ == "__main__":
-    db_connect = psycopg2.connect(
+    pg_client = psycopg2.connect(
         user="source",
         password="source",
         host="source-db",
         port=5432,
         database="source",
     )
-    main(db_connect=db_connect)
+    main(pg_client=pg_client)
