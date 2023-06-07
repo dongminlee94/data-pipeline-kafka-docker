@@ -10,7 +10,7 @@ services:
       - 12345:12345
     command: python server.py
     healthcheck:
-      test: ["CMD", "python", "-c", 'import rpyc;conn = rpyc.connect("localhost", 12345);conn.ping()']
+      test: ["CMD", "python", "-c", 'import rpyc;rpyc_client = rpyc.connect("localhost", 12345);rpyc_client.ping()']
       interval: 10s
       timeout: 5s
       retries: 5
