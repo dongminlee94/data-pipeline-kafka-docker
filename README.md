@@ -17,15 +17,29 @@ $ make init     # setup packages (need only once)
 ### 1. Create Infra
 
 ```bash
-$ make database         # create a source DB, a target DB, and a data generator (need only once)
-$ make kafka            # create a kafka cluster (need only once)
+$ make compose          # create all the containers
 ```
 
 You can delete the containers.
 
 ```bash
-$ make kafka-clean      # delete the kafka cluster
-$ make database-clean   # delete the databases
+$ make compose-clean    # delete the containers
+```
+
+You can divide the containers and create them.
+
+```bash
+$ make db       # create a postgres (source DB), a minio (target DB), a data generator, and a bucket creator (need only once)
+$ make kafka    # create a kafka cluster (need only once)
+$ make glue     # create a glue process that automated ETL (need only once)
+```
+
+You can delete the divided containers.
+
+```bash
+$ make glue-clean   # delete the glue process
+$ make kafka-clean  # delete the kafka cluster
+$ make db-clean     # delete the databases and the rest.
 ```
 
 ### 2. TBD
