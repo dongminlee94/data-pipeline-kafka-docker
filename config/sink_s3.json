@@ -1,0 +1,15 @@
+{
+    "name": "sink-s3",
+    "config": {
+        "connector.class": "io.confluent.connect.s3.S3SinkConnector",
+        "store.url": "http://minio:9000",
+        "aws.access.key.id": "minio",
+        "aws.secret.access.key": "minio123",
+        "s3.bucket.name": "bucket",
+        "topics": "iris_data",
+        "format.class": "io.confluent.connect.s3.format.avro.AvroFormat",
+        "storage.class": "io.confluent.connect.s3.storage.S3Storage",
+        "flush.size": 1,
+        "tasks.max": 2
+    }
+}
