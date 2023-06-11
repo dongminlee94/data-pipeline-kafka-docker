@@ -63,7 +63,7 @@ services:
       CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
 
   kafdrop:
-    image: obsidiandynamics/kafdrop
+    image: obsidiandynamics/kafdrop:3.32.0-SNAPSHOT
     container_name: kafdrop
     depends_on:
       - broker

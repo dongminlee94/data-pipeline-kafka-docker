@@ -65,20 +65,22 @@ def main(pg_client: connection) -> None:
             );
         """
         print(f"\nCount: {cnt}\n" f"Query: {insert_row_query}\n")
+
         with pg_client.cursor() as cur:
             cur.execute(insert_row_query)
             pg_client.commit()
 
         cnt += 1
-        sleep(5)
+        sleep(2)
 
 
 if __name__ == "__main__":
     pg_client = psycopg2.connect(
-        user="source",
-        password="source",
-        host="source-db",
+        user="postgres",
+        password="postgres",
+        host="postgres",
         port=5432,
-        database="source",
+        database="postgres",
     )
+
     main(pg_client=pg_client)
