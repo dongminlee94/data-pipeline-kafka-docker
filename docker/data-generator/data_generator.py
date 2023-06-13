@@ -12,7 +12,7 @@ def create_table(pg_client: connection) -> None:
     create_table_query = """
     CREATE TABLE IF NOT EXISTS iris_data (
         id SERIAL PRIMARY KEY,
-        timestamp timestamp,
+        timestamp text,
         sepal_length float8,
         sepal_width float8,
         petal_length float8,
@@ -56,7 +56,7 @@ def main(pg_client: connection) -> None:
         INSERT INTO iris_data
             (timestamp, sepal_length, sepal_width, petal_length, petal_width, target)
             VALUES (
-                NOW(),
+                TO_CHAR(NOW(), 'YYYY-MM-DD HH24:MI:SS'),
                 {data.sepal_length},
                 {data.sepal_width},
                 {data.petal_length},
@@ -65,20 +65,22 @@ def main(pg_client: connection) -> None:
             );
         """
         print(f"\nCount: {cnt}\n" f"Query: {insert_row_query}\n")
+
         with pg_client.cursor() as cur:
             cur.execute(insert_row_query)
             pg_client.commit()
 
         cnt += 1
-        sleep(5)
+        sleep(2)
 
 
 if __name__ == "__main__":
     pg_client = psycopg2.connect(
-        user="source",
-        password="source",
-        host="source-db",
+        user="postgres",
+        password="postgres",
+        host="postgres",
         port=5432,
-        database="source",
+        database="postgres",
     )
+
     main(pg_client=pg_client)
