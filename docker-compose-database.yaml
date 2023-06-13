@@ -38,16 +38,17 @@ services:
       MINIO_BROWSER_REDIRECT_URL: http://localhost:9901
     command: server /data/minio --console-address :9001
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9900/minio/health/live"]
-      interval: 30s
-      timeout: 20s
+      test: ["CMD", "curl", "-f", "http://minio:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
       retries: 3
 
   bucket-creator:
     image: minio/mc:RELEASE.2023-06-06T13-48-56Z
     container_name: bucket-creator
     depends_on:
-      - minio
+      minio:
+        condition: service_healthy
     entrypoint: ["/bin/bash", "-c"]
     command:
       - |
