@@ -12,7 +12,7 @@ def create_table(pg_client: connection) -> None:
     create_table_query = """
     CREATE TABLE IF NOT EXISTS iris_data (
         id SERIAL PRIMARY KEY,
-        timestamp timestamp,
+        timestamp text,
         sepal_length float8,
         sepal_width float8,
         petal_length float8,
@@ -56,7 +56,7 @@ def main(pg_client: connection) -> None:
         INSERT INTO iris_data
             (timestamp, sepal_length, sepal_width, petal_length, petal_width, target)
             VALUES (
-                NOW(),
+                TO_CHAR(NOW(), 'YYYY-MM-DD HH24:MI:SS'),
                 {data.sepal_length},
                 {data.sepal_width},
                 {data.petal_length},
