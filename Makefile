@@ -75,3 +75,6 @@ sink-s3:
 
 sink-s3-clean:
 	curl -X DELETE "http://localhost:8083/connectors/{sink-s3}"
+
+schema:
+	curl -X POST http://localhost:8081/subjects/{new_iris_data-value}/versions -H "Content-Type: application/vnd.schemaregistry.v1+json" -d @config/schema.json
