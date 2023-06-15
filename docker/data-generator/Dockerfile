@@ -7,6 +7,6 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /usr/app
 
 RUN pip install -U pip &&\
-    pip install scikit-learn==1.2.2 pandas==2.0.1 psycopg2-binary==2.9.6 redis
+    pip install scikit-learn==1.2.2 pandas==2.0.1 psycopg2-binary==2.9.6
 
 COPY data_generator.py data_generator.py
