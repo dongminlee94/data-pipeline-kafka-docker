@@ -26,8 +26,12 @@ class GlueClient:
             data_out = self.rpyc_client.root.pipeline(data_in)
             print(f"data_out: {data_out}\n")
 
-            # response = self.producer.send(topic="new_iris_data", value=data_out).get()
-            # print(response)
+            response = self.producer.send(topic="new_iris_data", value=data_out).get()
+            print(
+                f"response.topic: {response.topic}\n"
+                f"response.partition: {response.partition}\n"
+                f"response.offset: {response.offset}\n",
+            )
 
 
 if __name__ == "__main__":
