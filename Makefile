@@ -55,7 +55,6 @@ kafka-clean:
 	docker rmi kafka-connect
 
 glue:
-	curl -X POST http://localhost:8081/subjects/{new_iris_data-value}/versions -H "Content-Type: application/vnd.schemaregistry.v1+json" -d @config/schema.json
 	docker compose -p glue -f docker-compose-glue.yaml up -d
 
 glue-clean:
