@@ -5,4 +5,4 @@ WORKDIR /usr/app
 RUN pip install -U pip &&\
     pip install rpyc==5.3.1
 
-COPY server.py server.py
+COPY src src
