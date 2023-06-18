@@ -11,23 +11,23 @@ class GlueClient:
     """Glue client using RPyC SocketStream connection."""
 
     def __init__(self) -> None:
-        self.rpyc_client = rpyc.connect(host="localhost", port="12345")
+        self.rpyc_client = rpyc.connect(host="glue-server", port="12345")
 
-        schema_registry_client = SchemaRegistryClient({"url": "http://localhost:8081"})
+        schema_registry_client = SchemaRegistryClient({"url": "http://schema-registry:8081"})
 
         avro_deserializer = AvroDeserializer(
             schema_registry_client=schema_registry_client,
             schema_str=deserializer_schema,
         )
-        self.conumer = DeserializingConsumer(
+        self.consumer = DeserializingConsumer(
             {
-                "bootstrap.servers": "localhost:9092",
+                "bootstrap.servers": "broker:29092",
                 "group.id": "data-pipeline-kafka",
                 "auto.offset.reset": "earliest",
                 "value.deserializer": avro_deserializer,
             },
         )
-        self.conumer.subscribe(["iris_data"])
+        self.consumer.subscribe(["iris_data"])
 
         avro_serializer = AvroSerializer(
             schema_registry_client=schema_registry_client,
@@ -35,7 +35,7 @@ class GlueClient:
         )
         self.producer = SerializingProducer(
             {
-                "bootstrap.servers": "localhost:9092",
+                "bootstrap.servers": "broker:29092",
                 "value.serializer": avro_serializer,
             },
         )
@@ -43,7 +43,7 @@ class GlueClient:
     def run(self) -> None:
         """Consumes messages from topic_in and send outputs to topic_out."""
         while True:
-            message = self.conumer.poll(timeout=1.0)
+            message = self.consumer.poll(timeout=1.0)
 
             if message is not None:
                 data_in = message.value()

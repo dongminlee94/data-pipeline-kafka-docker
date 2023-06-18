@@ -60,11 +60,27 @@ serializer_schema = """
             "type": ["double", "null"]
         },
         {
+            "name": "sepal_sum",
+            "type": ["double", "null"]
+        },
+        {
+            "name": "sepal_mean",
+            "type": ["double", "null"]
+        },
+        {
             "name": "petal_length",
             "type": ["double", "null"]
         },
         {
             "name": "petal_width",
+            "type": ["double", "null"]
+        },
+        {
+            "name": "petal_sum",
+            "type": ["double", "null"]
+        },
+        {
+            "name": "petal_mean",
             "type": ["double", "null"]
         },
         {
