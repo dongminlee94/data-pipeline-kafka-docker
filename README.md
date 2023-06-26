@@ -7,7 +7,7 @@
 [![Type Checking: pytype](https://img.shields.io/badge/type%20checking-pytype-red)](https://github.com/google/pytype)
 [![Linting: ruff](https://img.shields.io/badge/linting-ruff-purple)](https://github.com/astral-sh/ruff)
 
-<p align="center"><img src="asset/landscape.svg" width="800"></p>
+<p align="center"><img src="asset/landscape_1.svg" width="800"></p>
 
 ## Prerequisites
 
