@@ -93,17 +93,17 @@ postgres=# select * from iris_data limit 5;
 
 ### 3. Check Kafka Topics
 
-You can access `localhost:9009` on a web browser and check the topics in Kafka through Kafdrop.
+You can access `localhost:9009` on a web browser and see the topics in Kafka through Kafdrop.
 
 <p align="center"><img src="asset/kafdrop_main_screen.png" width="800"></p>
 
-You can click the `iris_data` topic on the main screen of Kafdrop and click `View Messages` to check the data being produced to the `iris_data` topic through the JDBC source connector.
+You can click the `iris_data` topic on the main screen of Kafdrop and click `View Messages` to see the data being produced to the `iris_data` topic through the JDBC source connector.
 
 <p align="center"><img src="asset/kafdrop_topic_iris_data.png" width="800"></p>
 
 <p align="center"><img src="asset/kafdrop_topic_iris_data_topic_messages.png" width="800"></p>
 
-Similarly, you can click the `new_iris_data` topic on the main screen and click `View Messages` to check the data being produced to the `new_iris_data` topic through the Glue process.
+Similarly, you can click the `new_iris_data` topic on the main screen and click `View Messages` to see the data being produced to the `new_iris_data` topic through the Glue process.
 
 <p align="center"><img src="asset/kafdrop_topic_new_iris_data.png" width="800"></p>
 
@@ -111,13 +111,13 @@ Similarly, you can click the `new_iris_data` topic on the main screen and click 
 
 ### 4. Check Target DB
 
-You can access `localhost:9900` on the web browser and check the data being consumed in MinIO.
+You can access `localhost:9900` on the web browser and see the data being consumed in MinIO.
 
 <p align="center"><img src="asset/minio_main_screen.png" width="800"></p>
 
 <p align="center"><img src="asset/minio_data_check.png" width="800"></p>
 
-Yon can download and check the data, and you can check that it is in a different type from the data in the source DB.
+Yon can download and see the data, and you can check that it is in a different type from the data in the source DB.
 
 ```json
 {
@@ -135,7 +135,7 @@ Yon can download and check the data, and you can check that it is in a different
 }
 ```
 
-As shown in the landscape, we can see that the Glue process consumes the data in the `iris_data` topic, updates the type and value of the data, and then produces it to the `new_iris_data` topic.
+As shown in the landscape, you can confirm that the Glue process consumes the data in the `iris_data` topic, updates the type and value of the data, and then produces it to the `new_iris_data` topic.
 
 Let's make the data pipeline using Kafka together with this repository!
 
