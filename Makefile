@@ -24,7 +24,7 @@ format:
 	poetry run black .
 
 lint:
-	poetry run pytype docker
+	poetry run mypy docker
 	poetry run ruff docker --fix
 
 ######################
